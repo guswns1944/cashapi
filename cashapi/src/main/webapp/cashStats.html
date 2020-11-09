@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+	.hint{color:green;}
+</style>
+</head>
+<body>
+	<h1>Cashbook Stats Data</h1>
+	<div>p
+		<div><!-- 0) 호출 -->
+			<span>ex) 년도별 월 지출액 :</span>
+			<button id="totalOfMonthByYearTable" type="button">Table</button>
+			<button id="totalOfMonthByYearChart" type="button">Chart</button>
+			<button id="totalOfMonthByYearExcel" type="button">Excel</button>
+		</div>
+		<div><!-- 0) 출력 -->
+			<span id = "totalOfMonthByYearTableResult" class ="hint">데이터 결과물의 테이블 or 차트 or 엑셀파일 다운로드</span>
+		</div>
+	</div>
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+	$('#totalOfMonthByYearTable').click(function(){
+		$('#totalOfMonthByYearTableResult').html('totalOfMonthByYearTableResult');
+		$.ajax({
+			url:'/totalOfMonthByYear',
+			type:'get',
+			success: function(data){
+				//console.log(data);
+				let html=`
+					<table border="1">
+						<tr>
+							<th>january</th>
+							<th>february</th>
+							<th>march</th>
+							<th>april</th>
+							<th>may</th>
+							<th>june</th>
+							<th>july</th>
+							<th>august</th>
+							<th>september</th>
+							<th>october</th>
+							<th>november</th>
+							<th>december</th>
+						</tr>
+						<tr>
+							<td>${data.january}</td>
+							<td>${data.february}</td>
+							<td>${data.march}</td>
+							<td>${data.april}</td>
+							<td>${data.may}</td>
+							<td>${data.june}</td>
+							<td>${data.july}</td>
+							<td>${data.august}</td>
+							<td>${data.september}</td>
+							<td>${data.october}</td>
+							<td>${data.november}</td>
+							<td>${data.december}</td>
+						</tr>
+					</table>
+				`;
+				$('#totalOfMonthByYearTableResult').html(html);
+			}
+		});
+	});
+</script>
+</html>
